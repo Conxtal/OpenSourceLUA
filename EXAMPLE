@@ -1,11 +1,18 @@
 
  (Or anywhere where you play FX Really)
 
+local Player = game.Players.LocalPlayer
+local char = Player.Character or Player.CharacterAdded:Wait()
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Activate = ReplicatedStorage.Remotes.Skills.DoubleImpact.ActivateDouble --Remote event
+
 local fxHandler = require(ReplicatedStorage.Modules:WaitForChild("FXHandler"))
 
-local effectPropsRight = { --Syntax, import to name it this way
-    Name = "DivergentFistRight", --FX Name
-    Duration =  30 --Duration of FX
-}
+Activate.OnClientEvent:Connect(function(player, effectName, effectProperties, partToWeld, Offset, EmitBool)
+    print(player.Name .. " activated skill: " .. effectName)
 
-fxHandler:PlayEffect(effectPropsRight, "Right Arm", false)
+    -- Your logic to play the VFX locally
+    fxHandler:PlayEffect(player, effectName, effectProperties, partToWeld, Offset, EmitBool)
+    print("played fx")
+end)
