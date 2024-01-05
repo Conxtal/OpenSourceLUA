@@ -55,14 +55,6 @@ function vfxHandler:PlayEffect(player, remoteName, effectProperties, partToWeld,
             VFXClone:Destroy()
         end)
 
-        local Remotes = replicatedStorage.Remotes
-        for _, remote in pairs(Remotes:GetDescendants()) do
-            if remote.Name == remoteName and remote:IsA("RemoteEvent") then
-                remote:FireAllClients(player, effectName, effectProperties, partToWeld, Offset, EmitBool)
-                print("Fired Remote :3")
-            end
-        end
-
         return VFXClone
     else
         warn("VFX not found for effect: " .. tostring(effectName))
