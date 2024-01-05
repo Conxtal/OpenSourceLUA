@@ -16,3 +16,22 @@ Activate.OnClientEvent:Connect(function(player, effectName, effectProperties, pa
     fxHandler:PlayEffect(player, effectName, effectProperties, partToWeld, Offset, EmitBool)
     print("played fx")
 end)
+
+
+--ServerScript
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RemoteEvent = ReplicatedStorage.Remotes.Skills.DoubleImpact.ActivateDouble
+
+local vfxHandler = require(ReplicatedStorage.Modules:WaitForChild("FXHandler"))
+
+return function(player)
+    RemoteEvent.OnServerEvent:Connect(function(plr)
+        print(plr.Name .. " activated skill: " .. RemoteEvent.Name)
+        
+        RemoteEvent:FireAllClients(plr, "DivergentFist", {Name = "DivergentFistRight", Duration = 30}, "Right Arm", CFrame.new(0,0,0),false)
+        RemoteEvent:FireAllClients(plr, "DivergentFist", {Name = "DivergentFistLeft", Duration = 30}, "Left Arm", CFrame.new(0,0,0),false)
+        print("fired clients.")
+    end)
+end
+
