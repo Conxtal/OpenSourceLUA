@@ -1,0 +1,11 @@
+
+ (Or anywhere where you play FX Really)
+
+local fxHandler = require(ReplicatedStorage.Modules:WaitForChild("FXHandler"))
+
+local effectPropsRight = { --Syntax, import to name it this way
+    Name = "DivergentFistRight", --FX Name
+    Duration =  30 --Duration of FX
+}
+
+fxHandler:PlayEffect(effectPropsRight, "Right Arm", false)
